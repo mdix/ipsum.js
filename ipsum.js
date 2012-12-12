@@ -15,47 +15,51 @@ ipsumJs.keybindings = function() {
         var ZERO_PRESSED  = key.keyIdentifier === "U+0030" ? true : false;
         
         if (ALT_PRESSED && PLUS_PRESSED) {
-            ipsumJs.moreText();
+            ipsumJs.manipulateText('more');
             return;
         }
         if (ALT_PRESSED && MINUS_PRESSED) {
-            ipsumJs.lessText();
+            ipsumJs.manipulateText('less');
             return;
         }
         if (ALT_PRESSED && ZERO_PRESSED) {
-            ipsumJs.clearText(); 
+            ipsumJs.manipulateText('clear'); 
             return;
         }
     }
 }
 
-ipsumJs.moreText = function() {
-    for (var i = 0; i < ipsumJs.config.htmlTags.length; i++) {
+ipsumJs.manipulateText = function(operation) {
+     for (var i = 0; i < ipsumJs.config.htmlTags.length; i++) {
         var textElems = document.getElementsByTagName(ipsumJs.config.htmlTags[i]);
         for (var ii=0; ii < textElems.length; ii++) {
-            textElems[ii].textContent = textElems[ii].textContent + textElems[ii].textContent;
+            if (operation === 'more') {
+                ipsumJs.moreText(textElems[ii]);
+                continue;
+            }
+            if (operation === 'less') {
+                ipsumJs.lessText(textElems[ii]); 
+                continue;
+            }
+            if (operation === 'clear') {
+                ipsumJs.clearText(textElems[ii]); 
+                continue;
+            }
         }
-    }
+     } 
 }
 
-ipsumJs.lessText = function() {
-    for (var i = 0; i < ipsumJs.config.htmlTags.length; i++) {
-        var textElems = document.getElementsByTagName(ipsumJs.config.htmlTags[i]);
-        for (var ii=0; ii < textElems.length; ii++) {
-            var textLength = textElems[ii].textContent.length;
-            textElems[ii].textContent = textElems[ii].textContent.substring(textLength*0.1, textLength);
-        }
-    }
+ipsumJs.moreText = function(textElem) {
+    textElem.textContent = textElem.textContent + textElem.textContent;
 }
 
-ipsumJs.clearText = function() {
-    for (var i = 0; i < ipsumJs.config.htmlTags.length; i++) {
-        var textElems = document.getElementsByTagName(ipsumJs.config.htmlTags[i]);
-        for (var ii=0; ii < textElems.length; ii++) {
-            textElems[ii].textContent = '';
-        }
-    }
+ipsumJs.lessText = function(textElem) {
+    var textLength = textElem.textContent.length;
+    textElem.textContent = textElem.textContent.substring(textLength*0.1, textLength);
 }
 
+ipsumJs.clearText = function(textElem) {
+    textElem.textContent = '';
+}
 
 ipsumJs.init();
