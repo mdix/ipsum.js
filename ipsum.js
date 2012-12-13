@@ -1,10 +1,11 @@
 var ipsumJs = {};
 ipsumJs.config = {};
 ipsumJs.config.htmlTags = ['a', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'td', 'span'];
+ipsumJs.config.ipsumElems = ['Sed','ut','perspiciatis','unde','omnis','iste','natus','error','sit','voluptatem','accusantium','doloremque','laudantium,','totam','rem','aperiam,','eaque','ipsa','quae','ab','illo','inventore','veritatis','et','quasi','architecto','beatae','vitae','dicta','sunt','explicabo.','Nemo','enim','ipsam','voluptatem','quia','voluptas','sit','aspernatur','aut','odit','aut','fugit,','sed','quia','consequuntur','magni','dolores','eos','qui','ratione','voluptatem','sequi','nesciunt.','Neque','porro','quisquam','est,','qui','dolorem','ipsum','quia','dolor','sit','amet,','consectetur,','adipisci','velit,','sed','quia','non','numquam','eius','modi','tempora','incidunt','ut','labore','et','dolore','magnam','aliquam','quaerat','voluptatem.','Ut','enim','ad','minima','veniam,','quis','nostrum','exercitationem','ullam','corporis','suscipit','laboriosam,','nisi','ut','aliquid','ex','ea','commodi','consequatur?','Quis','autem','vel','eum','iure','reprehenderit','qui','in','ea','voluptate','velit','esse','quam','nihil','molestiae','consequatur,','vel','illum','qui','dolorem','eum','fugiat','quo','voluptas','nulla','pariatur?','At','vero','eos','et','accusamus','et','iusto','odio','dignissimos','ducimus','qui','blanditiis','praesentium','voluptatum','deleniti','atque','corrupti','quos','dolores','et','quas','molestias','excepturi','sint','occaecati','cupiditate','non','provident,','similique','sunt','in','culpa','qui','officia','deserunt','mollitia','animi,','id','est','laborum','et','dolorum','fuga.','Et','harum','quidem','rerum','facilis','est','et','expedita','distinctio.','Nam','libero','tempore,','cum','soluta','nobis','est','eligendi','optio','cumque','nihil','impedit','quo','minus','id','quod','maxime','placeat','facere','possimus,','omnis','voluptas','assumenda','est,','omnis','dolor','repellendus.','Temporibus','autem','quibusdam','et','aut','officiis','debitis','aut','rerum','necessitatibus','saepe','eveniet','ut','et','voluptates','repudiandae','sint','et','molestiae','non','recusandae.','Itaque','earum','rerum','hic','tenetur','a','sapiente','delectus,','ut','aut','reiciendis','voluptatibus','maiores','alias','consequatur','aut','perferendis','doloribus','asperiores','repellat.'];
 
 ipsumJs.init = function() {
     ipsumJs.keybindings();
-    console.log('ipsum.js loaded, use alt+ or alt- to increase / decrease text quantity' + 
+    console.log('ipsum.js loaded, use alt+ or alt- to increase / decrease text quantity' +
                 'or alt 0 to completely remove text in ' + ipsumJs.config.htmlTags + ' tags');
 }
 
@@ -14,7 +15,7 @@ ipsumJs.keybindings = function() {
         var PLUS_PRESSED  = key.keyIdentifier === "U+00BB" ? true : false;
         var MINUS_PRESSED = key.keyIdentifier === "U+00BD" ? true : false;
         var ZERO_PRESSED  = key.keyIdentifier === "U+0030" ? true : false;
-        
+
         if (ALT_PRESSED && PLUS_PRESSED) {
             ipsumJs.manipulateText('more');
             return;
@@ -24,7 +25,7 @@ ipsumJs.keybindings = function() {
             return;
         }
         if (ALT_PRESSED && ZERO_PRESSED) {
-            ipsumJs.manipulateText('clear'); 
+            ipsumJs.manipulateText('clear');
             return;
         }
     }
@@ -39,29 +40,34 @@ ipsumJs.manipulateText = function(operation) {
                 continue;
             }
             if (operation === 'less') {
-                ipsumJs.lessText(textElems[ii]); 
+                ipsumJs.lessText(textElems[ii]);
                 continue;
             }
             if (operation === 'clear') {
-                ipsumJs.clearText(textElems[ii]); 
+                ipsumJs.clearText(textElems[ii]);
                 continue;
             }
         }
-     } 
+     }
 }
 
 ipsumJs.moreText = function(textElem) {
     var textLength = textElem.textContent.length;
-    textElem.textContent += ' ' + textElem.textContent.substring(textLength * 0.9, textLength);
+    textElem.textContent += ' ' + ipsumJs.getRandomIpsumElement();
 }
 
 ipsumJs.lessText = function(textElem) {
-    var textLength = textElem.textContent.length;
-    textElem.textContent = textElem.textContent.substring(textLength * 0.1, textLength);
+    var lastSpaceInElemsText = textElem.textContent.lastIndexOf(" ");
+    textElem.textContent = textElem.textContent.substring(0, lastSpaceInElemsText);
 }
 
 ipsumJs.clearText = function(textElem) {
     textElem.textContent = '';
+}
+
+ipsumJs.getRandomIpsumElement = function() {
+    var numberOfIpsumElems = ipsumJs.config.ipsumElems.length - 1;
+    return ipsumJs.config.ipsumElems[Math.floor(Math.random() * numberOfIpsumElems)];
 }
 
 ipsumJs.init();
