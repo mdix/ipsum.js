@@ -10,4 +10,5 @@ Because it's a provides a quick and efficient way to check if a just designed we
 Insert the script into your page and press alt+ or alt- to add / remove some text.
 
 ## TODO
-- use lorem ipsum text instead of elems text content
+- check if element contains childs
+- check if element is empty (this collides with clearing, maybe clear but leave a html comment so we can fill the elem again)
