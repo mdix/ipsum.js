@@ -70,8 +70,4 @@ ipsumJs.getRandomIpsumElement = function() {
     return ipsumJs.config.ipsumElems[Math.floor(Math.random() * numberOfIpsumElems)];
 }
 
-ipsumJs.containsChildren = function(textElem) {
-
-}
-
 ipsumJs.init();
