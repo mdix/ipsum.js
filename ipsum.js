@@ -52,22 +52,26 @@ ipsumJs.manipulateText = function(operation) {
 }
 
 ipsumJs.moreText = function(textElem) {
-    var textLength = textElem.textContent.length;
-    textElem.textContent += ' ' + ipsumJs.getRandomIpsumElement();
+    var textLength = textElem.innerHTML.length;
+    textElem.innerHTML = ipsumJs.getRandomIpsumElement() + '    ' + textElem.innerHTML;
 }
 
 ipsumJs.lessText = function(textElem) {
-    var lastSpaceInElemsText = textElem.textContent.lastIndexOf(" ");
-    textElem.textContent = textElem.textContent.substring(0, lastSpaceInElemsText);
+    var lastSpaceInElemsText = textElem.innerHTML.lastIndexOf(" ");
+    textElem.innerHTML = textElem.innerHTML.substring(0, lastSpaceInElemsText);
 }
 
 ipsumJs.clearText = function(textElem) {
-    textElem.textContent = '';
+    textElem.innerHTML = '';
 }
 
 ipsumJs.getRandomIpsumElement = function() {
     var numberOfIpsumElems = ipsumJs.config.ipsumElems.length - 1;
     return ipsumJs.config.ipsumElems[Math.floor(Math.random() * numberOfIpsumElems)];
+}
+
+ipsumJs.containsChildren = function(textElem) {
+
 }
 
 ipsumJs.init();
