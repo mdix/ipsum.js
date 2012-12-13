@@ -1,4 +1,10 @@
+# ipsum.js
+
+## Preamble
 Just a quick midnight implementation. Will... could... may... might be improved sooner or later. :) 
 
-So this is how you use it:
+## So this is how you use it:
 Insert the script into your page and press alt+ or alt- to add / remove some text.
+
+## TODO
+- use lorem ipsum text instead of elems text content

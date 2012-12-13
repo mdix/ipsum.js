@@ -3,8 +3,9 @@ ipsumJs.config = {};
 ipsumJs.config.htmlTags = ['a', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'td', 'span'];
 
 ipsumJs.init = function() {
-    console.log('ipsum.js loaded, use alt+ or alt- to increase / decrease text quantity or alt 0 to completely remove text in ' + ipsumJs.config.htmlTags + ' tags');
     ipsumJs.keybindings();
+    console.log('ipsum.js loaded, use alt+ or alt- to increase / decrease text quantity' + 
+                'or alt 0 to completely remove text in ' + ipsumJs.config.htmlTags + ' tags');
 }
 
 ipsumJs.keybindings = function() {
@@ -32,7 +33,7 @@ ipsumJs.keybindings = function() {
 ipsumJs.manipulateText = function(operation) {
      for (var i = 0; i < ipsumJs.config.htmlTags.length; i++) {
         var textElems = document.getElementsByTagName(ipsumJs.config.htmlTags[i]);
-        for (var ii=0; ii < textElems.length; ii++) {
+        for (var ii = 0; ii < textElems.length; ii++) {
             if (operation === 'more') {
                 ipsumJs.moreText(textElems[ii]);
                 continue;
@@ -50,12 +51,13 @@ ipsumJs.manipulateText = function(operation) {
 }
 
 ipsumJs.moreText = function(textElem) {
-    textElem.textContent = textElem.textContent + textElem.textContent;
+    var textLength = textElem.textContent.length;
+    textElem.textContent += ' ' + textElem.textContent.substring(textLength * 0.9, textLength);
 }
 
 ipsumJs.lessText = function(textElem) {
     var textLength = textElem.textContent.length;
-    textElem.textContent = textElem.textContent.substring(textLength*0.1, textLength);
+    textElem.textContent = textElem.textContent.substring(textLength * 0.1, textLength);
 }
 
 ipsumJs.clearText = function(textElem) {
