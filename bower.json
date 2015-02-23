@@ -1,7 +1,7 @@
 {
   "name": "ipsum.js",
   "main": "ipsum.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/mdix/ipsum.js",
   "description": "Add/Remove words to test (flexible) layout.",
   "keywords": [
