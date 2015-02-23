@@ -8,21 +8,21 @@ ipsumJs.config.keyCodes.minus = {"main": 189, "numPad": 109};
 ipsumJs.config.keyCodes.zero = {"main": 48, "numPad": 96};
 
 ipsumJs.init = function() {
-	// because firefox uses different key codes for the _/- and +/= keys to all other browsers :-(
-	if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-		ipsumJs.config.keyCodes.plus.main = 61;
-		ipsumJs.config.keyCodes.minus.main = 173;
-	}
+    // because firefox uses different key codes for the _/- and +/= keys to all other browsers :-(
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+        ipsumJs.config.keyCodes.plus.main = 61;
+        ipsumJs.config.keyCodes.minus.main = 173;
+    }
 
     ipsumJs.keybindings();
     
-	console.log('ipsum.js loaded, use alt+ or alt- to increase / decrease text quantity' +
+    console.log('ipsum.js loaded, use alt+ or alt- to increase / decrease text quantity' +
                 'or alt 0 to completely remove text in ' + ipsumJs.config.htmlTags + ' tags');
 }
 
 ipsumJs.keybindings = function() {
     document.onkeydown = function(key) {
-		var keyCodes = ipsumJs.config.keyCodes;
+        var keyCodes = ipsumJs.config.keyCodes;
         var ALT_PRESSED   = key.altKey;
         var PLUS_PRESSED  = (key.keyCode === keyCodes.plus.main || key.keyCode === keyCodes.plus.numPad);
         var MINUS_PRESSED = (key.keyCode === keyCodes.minus.main || key.keyCode === keyCodes.minus.numPad);
