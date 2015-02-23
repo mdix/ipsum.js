@@ -6,8 +6,10 @@ Just a quick midnight implementation. Will... could... may... might be improved 
 ## Why?
 Because it's a provides a quick and efficient way to check if a just designed webpage / webapp can cope with more, less or no text inside its text elements (happens often when using CMS). 
 
-## So this is how you use it:
-Insert the script into your page and press alt+ or alt- to add / remove some text or alt 0 to remove the text completely.
+## Installation
+Insert the script into your page and press alt+ or alt- to add / remove some text or alt 0 to remove the text completely. If you use bower you can install it via:
+
+```bower install ipsumjs```
 
 ## TODO
 - check if element contains childs
